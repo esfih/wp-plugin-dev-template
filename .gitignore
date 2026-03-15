@@ -1,0 +1,11 @@
+.DS_Store
+.idea/
+.vscode/*.code-workspace
+node_modules/
+vendor/
+output/
+logs/
+dist/
+build/
+*.zip
+*.log

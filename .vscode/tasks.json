@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Bootstrap Foundation Layers",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "scripts/bootstrap-foundation.sh"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    }
+  ]
+}
