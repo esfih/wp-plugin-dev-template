@@ -2,8 +2,8 @@ $ErrorActionPreference = 'Stop'
 
 $CoreRemoteName = if ($env:CORE_REMOTE_NAME) { $env:CORE_REMOTE_NAME } else { 'master-core' }
 $WpRemoteName = if ($env:WP_REMOTE_NAME) { $env:WP_REMOTE_NAME } else { 'wp-overlay' }
-$CoreRemoteUrl = $env:CORE_REMOTE_URL
-$WpRemoteUrl = $env:WP_REMOTE_URL
+$CoreRemoteUrl = if ($env:CORE_REMOTE_URL) { $env:CORE_REMOTE_URL } else { 'https://github.com/esfih/master-core.git' }
+$WpRemoteUrl = if ($env:WP_REMOTE_URL) { $env:WP_REMOTE_URL } else { 'https://github.com/esfih/wp-overlay.git' }
 $Branch = if ($env:FOUNDATION_BRANCH) { $env:FOUNDATION_BRANCH } else { 'main' }
 
 function Set-RemoteIfProvided {

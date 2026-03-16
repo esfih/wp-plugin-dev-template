@@ -3,8 +3,8 @@ set -euo pipefail
 
 CORE_REMOTE_NAME="${CORE_REMOTE_NAME:-master-core}"
 WP_REMOTE_NAME="${WP_REMOTE_NAME:-wp-overlay}"
-CORE_REMOTE_URL="${CORE_REMOTE_URL:-}"
-WP_REMOTE_URL="${WP_REMOTE_URL:-}"
+CORE_REMOTE_URL="${CORE_REMOTE_URL:-https://github.com/esfih/master-core.git}"
+WP_REMOTE_URL="${WP_REMOTE_URL:-https://github.com/esfih/wp-overlay.git}"
 BRANCH="${FOUNDATION_BRANCH:-main}"
 
 add_or_update_remote() {

@@ -9,6 +9,11 @@ Use it to create a new app-local plugin repository, then pull shared layers into
 - `foundation/core` from `master-core`
 - `foundation/wp` from `wp-overlay`
 
+Upstream repositories:
+
+- `https://github.com/esfih/master-core`
+- `https://github.com/esfih/wp-overlay`
+
 The template owns:
 
 - root adapter docs
@@ -27,7 +32,7 @@ The shared repositories own:
 
 1. Create a new repository from this template.
 2. Set your product/plugin name in the root adapters.
-3. Add `master-core` and `wp-overlay` remotes.
+3. Add `master-core` and `wp-overlay` remotes or use the bootstrap scripts with the default upstream URLs.
 4. Pull `foundation/core` and `foundation/wp` using subtree.
 5. Keep app truth in root `specs/` and product code folders.
 

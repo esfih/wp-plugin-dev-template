@@ -29,9 +29,17 @@ This is the app-local workspace setup adapter.
 
 Use `foundation/core/docs/` for reusable setup, IDE-context, workflow, validation, and handover guidance.
 
+Default upstream:
+
+- `https://github.com/esfih/master-core`
+
 ### WordPress overlay setup guidance
 
 Use `foundation/wp/` when setup involves local WordPress runtime, plugin packaging, or WordPress-specific validation.
+
+Default upstream:
+
+- `https://github.com/esfih/wp-overlay`
 
 ### App-local setup truth
 

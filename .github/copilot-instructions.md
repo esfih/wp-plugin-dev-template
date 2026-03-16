@@ -23,4 +23,9 @@ Shared-layer rule:
 - reusable WordPress runtime and packaging improvements belong upstream in `wp-overlay`
 - app-specific feature specs, branding, and code stay local to this repo
 
+Default upstream repositories:
+
+- `https://github.com/esfih/master-core`
+- `https://github.com/esfih/wp-overlay`
+
 Before meaningful feature work, check the target feature `STATUS.md` and `feature-status.json`.
