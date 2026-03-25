@@ -1,0 +1,73 @@
+# Standard two-plugin WordPress development stack.
+# Provides one WordPress lane (WP 6.5 PHP 8.1 by default) with two plugin mounts:
+#   - plugin/       : the app/product plugin
+#   - cp-plugin/    : the control-plane plugin (billing, licensing, allowances)
+#
+# Override WP_IMAGE, ports, and DB creds in .env (see .env.example).
+# Full Docker patterns: foundation/wp/docs/WP-OVERLAY-README.md
+# WP-CLI usage:        foundation/wp/docs/WP-LOCAL-OPS.md
+
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass_dev}
+      MYSQL_DATABASE: ${DB_NAME:-wordpress}
+      MYSQL_USER: ${DB_USER:-wp_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-wp_pass_dev}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wpnet
+
+  wordpress:
+    build:
+      context: ./foundation/wp/docker
+      args:
+        WORDPRESS_BASE_IMAGE: ${WP_IMAGE:-wordpress:6.5-php8.1-apache}
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME:-wordpress}
+      WORDPRESS_DB_USER: ${DB_USER:-wp_user}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-wp_pass_dev}
+      WORDPRESS_TABLE_PREFIX: ${DB_PREFIX:-wp_}
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+        define('SCRIPT_DEBUG', true);
+        define('WP_ENVIRONMENT_TYPE', 'local');
+    ports:
+      - "${WP_PORT:-8080}:80"
+    volumes:
+      # Two-plugin developer mounts
+      - ./plugin:/var/www/html/wp-content/plugins/my-plugin
+      - ./cp-plugin:/var/www/html/wp-content/plugins/my-cp-plugin
+      # Debug log on host for easy tailing
+      - ./logs/wp:/var/www/html/wp-content
+    networks:
+      - wpnet
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass_dev}
+    ports:
+      - "${PMA_PORT:-8081}:80"
+    networks:
+      - wpnet
+
+volumes:
+  db_data:
+
+networks:
+  wpnet:

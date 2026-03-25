@@ -1,11 +1,41 @@
+# Runtime artifacts
+logs/
+output/diagnostics/
+output/releases/
+output/blueprint/
+
+# Local environment — never commit credentials
+.env
+
+# WordPress core files (not part of plugin development)
+wordpress/
+
+# Composer & Node dependencies (generate locally)
+vendor/
+node_modules/
+
+# OS artifacts
 .DS_Store
+Thumbs.db
+
+# IDE artifacts
 .idea/
 .vscode/*.code-workspace
-node_modules/
-vendor/
-output/
-logs/
+*.swp
+*.swo
+.phpunit.result.cache
+
+# Build artifacts
+*.zip
+*.tar.gz
+*.log
 dist/
 build/
-*.zip
-*.log
+
+# Temp / one-shot patch scripts
+_tmp_*.py
+_tmp_*.php
+_tmp_*.sh
+
+# Windows reserved names
+nul
